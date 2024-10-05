@@ -2,6 +2,8 @@ import { useState } from "react";
 
 const TodoListNew = (props) => {
 
+    const { addNewToDo } = props;
+
     //useState hook
     const [valueInput, setValueInput] = useState('');
 
@@ -10,7 +12,7 @@ const TodoListNew = (props) => {
     }
 
     const handleOnClick = () => {
-        console.log(valueInput);
+        addNewToDo(valueInput);
     }
 
     return (
