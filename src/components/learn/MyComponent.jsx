@@ -1,13 +1,26 @@
-//JSX : only one parent
-//use "fragment" to fix if you have two parents
-//use className instead of class
-//if use style inline : use camel case instead of kebab case
+
 import './style.css';
 
+//Using {} in HTML to execute a JavaScript command or display the value of a variable
+
 const MyComponent = () => {
+    // const test = "Nguyen Vu Ba Duy";
+    // const test = 123;
+    // const test = true;
+    // const test = undefined;
+    // const test = null;
+
+
+    //Using JSON.stringify
+    // const test = [1, 2, 3, 4];
+    const test = {
+        name: "Nguyen Vu Ba Duy",
+        age: "18"
+    }
     return (
         <>
-            <div>Nguyen Vu Ba Duy</div>
+            <div>{JSON.stringify(test)} & React</div>
+            <div>{console.log("Nguyen Vu Ba Duy")}</div>
             <div className="child" style={{ borderRadius: "10px" }}>child</div>
         </>
     );
