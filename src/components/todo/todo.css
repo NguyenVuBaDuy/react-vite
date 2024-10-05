@@ -23,7 +23,7 @@ body{
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-  color: transparent;
+    color: transparent;
 }
 
 .todo-new{
@@ -44,7 +44,7 @@ input[type='text']::placeholder{
 }
 
 button{
-    margin-left: 10px;
+    margin: 0 10px;
     background-color: #3B99E7;
     color: white;
     padding: 16px 40px;

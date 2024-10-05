@@ -1,13 +1,16 @@
+import { useState } from "react";
 
 const TodoListNew = (props) => {
-    const { addNewToDo } = props;
+
+    //useState hook
+    const [valueInput, setValueInput] = useState('');
 
     const handleOnChange = (name) => {
-        console.log('>>> handleOnChange : ' + name);
+        setValueInput(name);
     }
 
     const handleOnClick = () => {
-        console.log('>>> handleOnclick run...');
+        console.log(valueInput);
     }
 
     return (
@@ -16,6 +19,9 @@ const TodoListNew = (props) => {
                 placeholder='Enter your task'
                 onChange={(event) => handleOnChange(event.target.value)} />
             <button onClick={() => handleOnClick()}>Add</button>
+            <span>
+                My text input = {valueInput}
+            </span>
         </div>
     )
 }
