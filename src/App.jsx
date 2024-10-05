@@ -21,6 +21,10 @@ const App = () => {
     setTodoList([...todoList, newToDo])
   }
 
+  const deleteToDo = (id) => {
+    var newTodo = todoList.filter(todo => todo.id !== id)
+    setTodoList(newTodo);
+  }
 
   return (
     <div className="todo-container">
@@ -38,7 +42,7 @@ const App = () => {
       } */}
 
       {todoList.length > 0 ?
-        <TodoListData todoList={todoList} />
+        <TodoListData todoList={todoList} deleteToDo={deleteToDo} />
 
         :
         <div>
