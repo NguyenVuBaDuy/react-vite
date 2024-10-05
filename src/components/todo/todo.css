@@ -23,7 +23,7 @@ body{
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
-        font-weight: 700;
+    font-weight: 700;
 }
 
 .todo-new{
@@ -56,11 +56,19 @@ input[type='text']::placeholder{
     border: 2px solid #B7B7B7;
     border-radius: 2px;
     text-align: left;
-    padding: 0 20px;
+    padding: 20px 20px;
 }
 
 .todo-list div{
     margin: 15px 0;
+}
+
+.todo-list div:first-child{
+    margin-top: 0;
+}
+
+.todo-list div:last-child{
+    margin-bottom: 0;
 }
 
 .todo-image {
@@ -102,6 +110,11 @@ input[type='text']::placeholder{
 .todo-item{
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+
+.todo-item > div{
+    margin-bottom: 0 !important;
 }
 
 .todo-item .btn{

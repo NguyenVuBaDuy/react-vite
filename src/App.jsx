@@ -10,17 +10,8 @@ const App = () => {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
-  const [todoList, setTodoList] = useState([
-    { id: 1, name: "Learning React" },
-    { id: 2, name: "Hoi Dan IT" }
-  ]);
+  const [todoList, setTodoList] = useState([]);
 
-  const name = "Nguyen Vu Ba Duy";
-  const age = 19;
-  const data = {
-    address: "Binh Duong",
-    country: "Viet Nam"
-  }
 
   const addNewToDo = (name) => {
     var newToDo = {
@@ -35,7 +26,7 @@ const App = () => {
     <div className="todo-container">
       <div className="todo-title">Todo list</div>
       <TodoListNew addNewToDo={addNewToDo} />
-      <TodoListData name={name} age={age} data={data} todoList={todoList} />
+      <TodoListData todoList={todoList} />
       <div>
         <img src={reactLogo} className='todo-image logo' />
       </div>
