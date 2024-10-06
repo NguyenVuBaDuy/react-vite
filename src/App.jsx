@@ -1,6 +1,6 @@
-import './components/todo/todo.css'
 import TodoListNew from './components/todo/TodoListNew'
 import TodoListData from './components/todo/TodoListData'
+import './components/todo/todo.css'
 import reactLogo from './assets/react.svg'
 import { useState } from 'react'
 
