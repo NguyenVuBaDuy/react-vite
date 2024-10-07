@@ -22,7 +22,7 @@
     margin-bottom: 30px;
 }
 
-input[type='text']{
+.todo-new input[type='text']{
     border: none;
     outline: none;
     background-color: #EDF2F7;
@@ -31,7 +31,7 @@ input[type='text']{
     border-radius: 5px;
 }
 
-input[type='text']::placeholder{
+.todo-new input[type='text']::placeholder{
     opacity: 0.6;
 }
 .btn{
