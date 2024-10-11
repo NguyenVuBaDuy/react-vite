@@ -57,7 +57,6 @@ const UpdateUserModal = (props) => {
                     <span>Id</span>
                     <Input
                         value={id}
-                        onChange={event => setEmail(event.target.value)}
                         disabled
                     />
                 </div>
