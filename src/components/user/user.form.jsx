@@ -48,11 +48,10 @@ const UserForm = ({ loadUser }) => {
                 </div>
 
                 <Modal
-                    title="Create User  "
+                    title="Create User"
                     open={isModalOpen}
                     onOk={() => handleSubmitBtn()}
                     onCancel={() => resetAndCloseModal()}
-                    maskClosable={false}
                     okText={"CREATE"}>
                     <div>
                         <span>Full Name</span>
