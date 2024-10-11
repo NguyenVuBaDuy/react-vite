@@ -52,7 +52,8 @@ const UserForm = ({ loadUser }) => {
                     open={isModalOpen}
                     onOk={() => handleSubmitBtn()}
                     onCancel={() => resetAndCloseModal()}
-                    okText={"CREATE"}>
+                    okText={"CREATE"}
+                    maskClosable={false}>
                     <div>
                         <span>Full Name</span>
                         <Input
