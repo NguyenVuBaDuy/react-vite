@@ -1,6 +1,6 @@
 import { Input, notification, Modal } from 'antd'
 import { useEffect, useState } from 'react';
-import { createUserAPI } from '../../services/api.service';
+import { createUserAPI, updateUserAPI } from '../../services/api.service';
 
 const UpdateUserModal = (props) => {
     const [id, setId] = useState("")
@@ -19,17 +19,17 @@ const UpdateUserModal = (props) => {
     }, [dataUpdate])
 
     const handleSubmitBtn = async () => {
-        const res = await createUserAPI(fullName, email, password, phone);
+        const res = await updateUserAPI(id, fullName, phone);
         if (res.data) {
             notification.success({
-                message: "Create User",
-                description: "Successful!"
+                message: "Update User",
+                description: "Update User Successful!"
             })
             resetAndCloseModal()
             await loadUser()
         } else {
             notification.error({
-                message: "Error create user",
+                message: "Error update user",
                 description: JSON.stringify(res)
             })
         }

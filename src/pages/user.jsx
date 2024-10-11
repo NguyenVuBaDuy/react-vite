@@ -21,7 +21,7 @@ const UserPage = () => {
     return (
         <div style={{ padding: "20px" }}>
             <UserForm dataUsers={dataUsers} loadUser={loadUser} />
-            <UserTable dataUsers={dataUsers} />
+            <UserTable dataUsers={dataUsers} loadUser={loadUser} />
         </div>
     )
 }

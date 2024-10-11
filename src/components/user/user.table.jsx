@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 
 
-const UserTable = ({ dataUsers }) => {
+const UserTable = ({ dataUsers, loadUser }) => {
 
     const [isModalUpdateOpen, setIsModalUpdateOpen] = useState(false)
     const [dataUpdate, setDataUpdate] = useState(null)
@@ -56,6 +56,7 @@ const UserTable = ({ dataUsers }) => {
                 setIsModalUpdateOpen={setIsModalUpdateOpen}
                 dataUpdate={dataUpdate}
                 setDataUpdate={setDataUpdate}
+                loadUser={loadUser}
             />
         </>
     );
