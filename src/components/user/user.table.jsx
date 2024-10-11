@@ -96,7 +96,7 @@ const UserTable = ({ dataUsers, loadUser }) => {
                 setIsOpenViewDetail={setIsOpenViewDetail}
                 dataDetail={dataDetail}
                 setDataDetail={setDataDetail}
-
+                loadUser={loadUser}
             />
         </>
     );
