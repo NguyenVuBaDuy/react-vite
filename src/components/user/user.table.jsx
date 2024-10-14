@@ -6,7 +6,10 @@ import ViewUserDetail from './view.user.detail';
 import { deleteUserAPI } from '../../services/api.service';
 
 
-const UserTable = ({ dataUsers, loadUser }) => {
+const UserTable = (props) => {
+
+    const { dataUsers, loadUser, current, pageSize,
+        total, setCurrent, setPageSize } = props
 
     const [isModalUpdateOpen, setIsModalUpdateOpen] = useState(false)
     const [dataUpdate, setDataUpdate] = useState(null)
@@ -85,13 +88,25 @@ const UserTable = ({ dataUsers, loadUser }) => {
         },
     ];
 
+    const onChange = (pagination, filters, sorter, extra) => {
+        console.log(">>> check ", pagination, filters, sorter, extra)
+    };
 
     return (
         <>
             <Table
                 columns={columns}
                 dataSource={dataUsers}
-                rowKey={"_id"} />
+                rowKey={"_id"}
+                pagination={
+                    {
+                        current: current,
+                        pageSize: pageSize,
+                        showSizeChanger: true,
+                        total: total,
+                        showTotal: (total, range) => { return (<div> {range[0]}-{range[1]} trên {total}</div>) }
+                    }}
+                onChange={onChange} />
             <UpdateUserModal
                 isModalUpdateOpen={isModalUpdateOpen}
                 setIsModalUpdateOpen={setIsModalUpdateOpen}
