@@ -49,7 +49,7 @@ const ViewUserDetail = (props) => {
             } else {
                 notification.error({
                     message: "Error Upload Avatar",
-                    description: JSON.stringify(resUpload.message)
+                    description: JSON.stringify(resUpdateAvatar.message)
                 })
             }
         } else {
@@ -83,9 +83,19 @@ const ViewUserDetail = (props) => {
                     <br />
                     <div style={{
                         marginTop: "10px",
-                        height: "100px", width: "150px",
+                        height: "150px",
+                        width: "150px",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
                     }}>
-                        <img style={{ height: "100%", width: "100%", objectFit: "contain" }}
+                        <img style={{
+                            height: "100%",
+                            width: "100%",
+                            objectFit: "cover",
+                            objectPosition: "center",
+                            borderRadius: "50%"
+                        }}
                             src={`${import.meta.env.VITE_BACKEND_URL}/images/avatar/${dataDetail.avatar}`} />
                     </div>
 
@@ -107,10 +117,19 @@ const ViewUserDetail = (props) => {
                         <>
                             <div style={{
                                 marginTop: "10px",
-                                marginBottom: "15px",
-                                height: "100px", width: "150px",
+                                height: "150px",
+                                width: "150px",
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
                             }}>
-                                <img style={{ height: "100%", width: "100%", objectFit: "contain" }}
+                                <img style={{
+                                    height: "100%",
+                                    width: "100%",
+                                    objectFit: "cover",
+                                    objectPosition: "center",
+                                    borderRadius: "50%"
+                                }}
                                     src={preview} />
                             </div>
 
