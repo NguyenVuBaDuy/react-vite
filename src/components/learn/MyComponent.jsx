@@ -20,7 +20,6 @@ const MyComponent = () => {
     return (
         <>
             <div>{JSON.stringify(test)} & React</div>
-            <div>{console.log("Nguyen Vu Ba Duy")}</div>
             <div className="child" style={{ borderRadius: "10px" }}>child</div>
         </>
     );

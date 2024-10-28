@@ -14,10 +14,8 @@ const Header = () => {
 
     const { user } = useContext(AuthContext)
 
-    console.log(">>> check user : ", user);
 
     const onClick = (e) => {
-        console.log('click ', e)
         setCurrent(e.key)
     };
 
@@ -37,11 +35,13 @@ const Header = () => {
             key: 'books',
             icon: <BookOutlined />,
         },
+
         ...(!user.id ? [{
             label: <Link to={"/login"}>Đăng nhập</Link>,
             key: 'login',
             icon: <LoginOutlined />
         }] : []),
+
         ...(user.id ? [{
             label: `Welcome ${user.fullName}`,
             key: "setting",
