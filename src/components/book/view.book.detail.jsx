@@ -3,7 +3,6 @@ import { Drawer } from "antd"
 const ViewBookDetail = (props) => {
 
     const { dataBookDetail, isOpenBookDetail, formatVND, setIsOpenBookDetail } = props
-    console.log(dataBookDetail)
 
     return (
         <Drawer title="Chi tiết book"

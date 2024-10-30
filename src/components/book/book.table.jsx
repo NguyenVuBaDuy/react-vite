@@ -1,21 +1,58 @@
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import { Popconfirm, Table } from "antd";
+import { Button, Popconfirm, Table } from "antd";
 import ViewBookDetail from "./view.book.detail";
-import { } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import CreateBookControl from "./create.book.control";
+import { fetchAllBookAPI } from "../../services/api.service"
+
 
 
 const BookTable = (props) => {
 
-    const { dataBooks, current, setCurrent, pageSize, setPageSize, total } = props
+    const [dataBooks, setDataBooks] = useState([])
+    const [current, setCurrent] = useState(1)
+    const [pageSize, setPageSize] = useState(5)
+    const [total, setTotal] = useState(10)
+
+    const [isOpenBookDetail, setIsOpenBookDetail] = useState(false)
+    const [dataBookDetail, setDataBookDetail] = useState(null)
+
+    const [isModalOpen, setIsModalOpen] = useState(false)
+
+    useEffect(() => {
+        loadBook();
+    }, [current, pageSize])
+
+    const loadBook = async () => {
+        const res = await fetchAllBookAPI(current, pageSize)
+        if (res.data) {
+            setDataBooks(res.data.result)
+            setCurrent(res.data.meta.current)
+            setPageSize(res.data.meta.pageSize)
+            setTotal(res.data.meta.total)
+        }
+    }
+
 
 
     const formatVND = (amount) => {
         return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
     };
 
-    const [isOpenBookDetail, setIsOpenBookDetail] = useState(false)
-    const [dataBookDetail, setDataBookDetail] = useState(null)
+
+    const onChange = (pagination) => {
+        if (pagination && pagination.current) {
+            if (+current != +pagination.current) {
+                setCurrent(+pagination.current)
+            }
+        }
+
+        if (pagination && pagination.pageSize) {
+            if (+pageSize != +pagination.pageSize) {
+                setPageSize(+pagination.pageSize)
+            }
+        }
+    }
 
     const columns = [
         {
@@ -81,23 +118,19 @@ const BookTable = (props) => {
         },
     ];
 
-    const onChange = (pagination) => {
-        if (pagination && pagination.current) {
-            if (+current != +pagination.current) {
-                setCurrent(+pagination.current)
-            }
-        }
 
-        if (pagination && pagination.pageSize) {
-            if (+pageSize != +pagination.pageSize) {
-                setPageSize(+pagination.pageSize)
-            }
-        }
-    }
 
 
     return (
         <>
+
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <h3>Table Books</h3>
+                <Button
+                    type='primary'
+                    onClick={() => { setIsModalOpen(true) }}>Create Book</Button>
+            </div>
+
             <Table
                 dataSource={dataBooks}
                 columns={columns}
@@ -111,11 +144,17 @@ const BookTable = (props) => {
                         showTotal: (total, range) => { return (<div> {range[0]}-{range[1]} trên {total}</div>) }
                     }}
                 onChange={onChange} />
+
             <ViewBookDetail
                 dataBookDetail={dataBookDetail}
                 isOpenBookDetail={isOpenBookDetail}
                 setIsOpenBookDetail={setIsOpenBookDetail}
                 formatVND={formatVND} />
+
+            <CreateBookControl
+                isModalOpen={isModalOpen}
+                setIsModalOpen={setIsModalOpen}
+                loadBook={loadBook} />
         </>
     )
 
