@@ -1,10 +1,21 @@
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Popconfirm, Table } from "antd";
+import ViewBookDetail from "./view.book.detail";
+import { } from "react-router-dom";
+import { useState } from "react";
 
 
 const BookTable = (props) => {
 
     const { dataBooks, current, setCurrent, pageSize, setPageSize, total } = props
+
+
+    const formatVND = (amount) => {
+        return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
+    };
+
+    const [isOpenBookDetail, setIsOpenBookDetail] = useState(false)
+    const [dataBookDetail, setDataBookDetail] = useState(null)
 
     const columns = [
         {
@@ -21,7 +32,10 @@ const BookTable = (props) => {
             title: 'Id',
             dataIndex: '_id',
             render: (_, record) => (
-                <a href="#">
+                <a href="#" onClick={() => {
+                    setIsOpenBookDetail(true)
+                    setDataBookDetail(record)
+                }}>
                     {record._id}
                 </a>
             )
@@ -34,7 +48,7 @@ const BookTable = (props) => {
             title: 'Giá tiền',
             dataIndex: 'price',
             render: (_, record) => (
-                <div>{`${record.price} ₫`}</div>
+                <div>{formatVND(record.price)}</div>
             )
         },
         {
@@ -81,21 +95,28 @@ const BookTable = (props) => {
         }
     }
 
-    return (
-        <Table
-            dataSource={dataBooks}
-            columns={columns}
-            rowKey={"_id"}
-            pagination={
-                {
-                    current: current,
-                    pageSize: pageSize,
-                    showSizeChanger: true,
-                    total: total,
-                    showTotal: (total, range) => { return (<div> {range[0]}-{range[1]} trên {total}</div>) }
-                }}
-            onChange={onChange} />
 
+    return (
+        <>
+            <Table
+                dataSource={dataBooks}
+                columns={columns}
+                rowKey={"_id"}
+                pagination={
+                    {
+                        current: current,
+                        pageSize: pageSize,
+                        showSizeChanger: true,
+                        total: total,
+                        showTotal: (total, range) => { return (<div> {range[0]}-{range[1]} trên {total}</div>) }
+                    }}
+                onChange={onChange} />
+            <ViewBookDetail
+                dataBookDetail={dataBookDetail}
+                isOpenBookDetail={isOpenBookDetail}
+                setIsOpenBookDetail={setIsOpenBookDetail}
+                formatVND={formatVND} />
+        </>
     )
 
 }
