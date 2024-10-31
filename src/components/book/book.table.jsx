@@ -4,6 +4,7 @@ import ViewBookDetail from "./view.book.detail";
 import { useEffect, useState } from "react";
 import CreateBookControl from "./create.book.control";
 import { fetchAllBookAPI } from "../../services/api.service"
+import CreateBookUncontrol from "./create.book.uncontrol";
 
 
 
@@ -151,7 +152,12 @@ const BookTable = (props) => {
                 setIsOpenBookDetail={setIsOpenBookDetail}
                 formatVND={formatVND} />
 
-            <CreateBookControl
+            {/* <CreateBookControl
+                isModalOpen={isModalOpen}
+                setIsModalOpen={setIsModalOpen}
+                loadBook={loadBook} /> */}
+
+            <CreateBookUncontrol
                 isModalOpen={isModalOpen}
                 setIsModalOpen={setIsModalOpen}
                 loadBook={loadBook} />

@@ -160,7 +160,7 @@ const CreateBookControl = (props) => {
                         <img style={{
                             height: "100%",
                             width: "100%",
-                            objectFit: "cover",
+                            objectFit: "contain",
                             objectPosition: "center",
                         }}
                             src={preview} />
