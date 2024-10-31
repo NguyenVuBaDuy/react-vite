@@ -85,7 +85,7 @@ const UpdateBookControl = (props) => {
                 return
             }
         }
-        CallApiUpdateBook(newThumbnail)
+        await CallApiUpdateBook(newThumbnail)
     }
 
     const resetAndCloseModal = () => {
