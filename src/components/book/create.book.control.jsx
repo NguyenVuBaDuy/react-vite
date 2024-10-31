@@ -15,6 +15,8 @@ const CreateBookControl = (props) => {
     const [selectedFile, setSelectedFile] = useState()
     const [preview, setPreview] = useState()
 
+    const [isLoadingModal, setIsLoadingModal] = useState(false)
+
     const handleSubmitCreateBook = async () => {
 
         if (!selectedFile) {
@@ -24,7 +26,7 @@ const CreateBookControl = (props) => {
             })
             return
         }
-
+        setIsLoadingModal(true)
         const resUpload = await handleUploadFile(selectedFile, "book")
         if (resUpload.data) {
             const newThumbnail = resUpload.data.fileUploaded
@@ -53,6 +55,7 @@ const CreateBookControl = (props) => {
                 description: "Vui lòng thêm hình ảnh"
             })
         }
+        setIsLoadingModal(false)
     }
 
     const resetAndCloseModal = () => {
@@ -84,7 +87,12 @@ const CreateBookControl = (props) => {
         <Modal title="Create Book"
             open={isModalOpen}
             onOk={() => { handleSubmitCreateBook() }}
-            onCancel={() => { resetAndCloseModal() }}>
+            onCancel={() => { resetAndCloseModal() }}
+            okText="Create"
+            okButtonProps={{
+                loading: isLoadingModal
+            }}
+        >
             <p>Tiêu đề:</p>
             <Input
                 value={mainText}

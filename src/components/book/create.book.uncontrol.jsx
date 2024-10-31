@@ -11,8 +11,10 @@ const CreateBookUncontrol = (props) => {
     const [selectedFile, setSelectedFile] = useState()
     const [preview, setPreview] = useState()
 
-    const handleSubmitButton = async (values) => {
+    const [isLoadingModal, setIsLoadingModal] = useState(false)
 
+    const handleSubmitButton = async (values) => {
+        setIsLoadingModal(true)
         if (!selectedFile) {
             notification.error({
                 message: "Error Upload Thumbnail",
@@ -20,7 +22,6 @@ const CreateBookUncontrol = (props) => {
             })
             return
         }
-
         const resUpload = await handleUploadFile(selectedFile, "book")
 
         if (resUpload.data) {
@@ -83,7 +84,11 @@ const CreateBookUncontrol = (props) => {
             title="Create Book"
             open={isModalOpen}
             onOk={() => form.submit()}
+            okButtonProps={{
+                loading: isLoadingModal
+            }}
             onCancel={() => { resetAndCloseModal() }}
+            okText="Create"
             centered>
             <Form form={form}
                 layout="vertical"

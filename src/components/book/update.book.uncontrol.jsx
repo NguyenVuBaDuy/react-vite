@@ -12,6 +12,9 @@ const UpdateBookUncontrol = (props) => {
     const [preview, setPreview] = useState(null)
     const [selectedFile, setSelectedFile] = useState(null)
 
+    const [isLoadingModal, setIsLoadingModal] = useState(false)
+
+
     useEffect(() => {
         if (dataUpdate && dataUpdate._id) {
             form.setFieldsValue({
@@ -66,7 +69,7 @@ const UpdateBookUncontrol = (props) => {
     }
 
     const handleSubmitButton = async (values) => {
-
+        setIsLoadingModal(true)
         let newThumbnail = ""
         if (!preview && !selectedFile) {
             return
@@ -86,6 +89,7 @@ const UpdateBookUncontrol = (props) => {
             }
         }
         await CallApiUpdateBook(values, newThumbnail)
+        setIsLoadingModal(false)
     }
 
     const resetAndCloseModal = () => {
@@ -103,6 +107,9 @@ const UpdateBookUncontrol = (props) => {
             onOk={() => form.submit()}
             onCancel={() => { resetAndCloseModal() }}
             okText="Save"
+            okButtonProps={{
+                loading: isLoadingModal
+            }}
             centered>
             <Form
                 form={form}

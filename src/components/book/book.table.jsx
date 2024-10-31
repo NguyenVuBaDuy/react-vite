@@ -25,12 +25,14 @@ const BookTable = (props) => {
     const [isModalUpdateOpen, setIsModalUpdateOpen] = useState(false)
     const [dataUpdate, setDataUpdate] = useState(null)
 
+    const [isLoadingTable, setIsLoadingTable] = useState(false)
 
     useEffect(() => {
         loadBook();
     }, [current, pageSize])
 
     const loadBook = async () => {
+        setIsLoadingTable(true)
         const res = await fetchAllBookAPI(current, pageSize)
         if (res.data) {
             setDataBooks(res.data.result)
@@ -38,6 +40,8 @@ const BookTable = (props) => {
             setPageSize(res.data.meta.pageSize)
             setTotal(res.data.meta.total)
         }
+        setIsLoadingTable(false)
+
     }
 
 
@@ -171,7 +175,8 @@ const BookTable = (props) => {
                         total: total,
                         showTotal: (total, range) => { return (<div> {range[0]}-{range[1]} trên {total}</div>) }
                     }}
-                onChange={onChange} />
+                onChange={onChange}
+                loading={isLoadingTable} />
 
             <ViewBookDetail
                 dataBookDetail={dataBookDetail}

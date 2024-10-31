@@ -28,6 +28,9 @@ const UpdateBookControl = (props) => {
     const [preview, setPreview] = useState(null)
     const [selectedFile, setSelectedFile] = useState(null)
 
+    const [isLoadingModal, setIsLoadingModal] = useState(false)
+
+
     const handleUploadThumbnail = (event) => {
         if (!event.target.files || event.target.files.length === 0) {
             setSelectedFile(null)
@@ -43,6 +46,7 @@ const UpdateBookControl = (props) => {
     }
 
     const CallApiUpdateBook = async (newThumbnail) => {
+
         const resUpdateBook = await updateBookAPI(id, newThumbnail, mainText, author, price, quantity, category)
         if (resUpdateBook.data) {
             notification.success({
@@ -61,7 +65,7 @@ const UpdateBookControl = (props) => {
 
     const handleUpdateBook = async () => {
         //không có preview và không có file
-
+        setIsLoadingModal(true)
         let newThumbnail = ""
 
         if (!selectedFile && !preview) {
@@ -86,6 +90,7 @@ const UpdateBookControl = (props) => {
             }
         }
         await CallApiUpdateBook(newThumbnail)
+        setIsLoadingModal(false)
     }
 
     const resetAndCloseModal = () => {
@@ -108,6 +113,9 @@ const UpdateBookControl = (props) => {
             onOk={() => { handleUpdateBook() }}
             onCancel={() => { resetAndCloseModal() }}
             okText="SAVE"
+            okButtonProps={{
+                loading: isLoadingModal
+            }}
             centered>
             <p>Id</p>
             <Input
