@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import CreateBookControl from "./create.book.control";
 import { fetchAllBookAPI } from "../../services/api.service"
 import CreateBookUncontrol from "./create.book.uncontrol";
+import UpdateBookControl from "./update.book.control";
 
 
 
@@ -19,6 +20,10 @@ const BookTable = (props) => {
     const [dataBookDetail, setDataBookDetail] = useState(null)
 
     const [isModalOpen, setIsModalOpen] = useState(false)
+
+    const [isModalUpdateOpen, setIsModalUpdateOpen] = useState(false)
+    const [dataUpdate, setDataUpdate] = useState(null)
+
 
     useEffect(() => {
         loadBook();
@@ -102,7 +107,12 @@ const BookTable = (props) => {
             render: (_, record) => {
                 return (
                     <div style={{ display: "flex", gap: "20px" }}>
-                        <EditOutlined style={{ color: "orange", cursor: "pointer" }} />
+                        <EditOutlined
+                            style={{ color: "orange", cursor: "pointer" }}
+                            onClick={() => {
+                                setIsModalUpdateOpen(true)
+                                setDataUpdate(record)
+                            }} />
                         <Popconfirm
                             title="Delete the book"
                             description="Are you sure to delete this book?"
@@ -161,6 +171,13 @@ const BookTable = (props) => {
                 isModalOpen={isModalOpen}
                 setIsModalOpen={setIsModalOpen}
                 loadBook={loadBook} />
+
+            <UpdateBookControl
+                isModalUpdateOpen={isModalUpdateOpen}
+                setIsModalUpdateOpen={setIsModalUpdateOpen}
+                dataUpdate={dataUpdate}
+                loadBook={loadBook}
+                setDataUpdate={setDataUpdate} />
         </>
     )
 
